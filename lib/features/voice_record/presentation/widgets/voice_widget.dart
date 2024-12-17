@@ -1,30 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:telepatia/features/voice_record/presentation/controller/voice_controller.dart';
 
-class VoiceWidget extends StatefulWidget {
+class VoiceWidget extends ConsumerWidget {
   const VoiceWidget({super.key});
 
   @override
-  State<VoiceWidget> createState() => _VoiceWidgetState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final voiceState = ref.watch(voiceControllerProvider);
+    final voiceController = ref.read(voiceControllerProvider.notifier);
 
-class _VoiceWidgetState extends State<VoiceWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {},
-      child: Container(
-        width: 200,
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: const Color.fromARGB(105, 201, 243, 33),
-        ),
-        child: const Row(
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          if (voiceState.isRecording) {
+            await voiceController.stopRecordAudio();
+          } else {
+            await voiceController.recordAudio();
+          }
+        },
+        child: Icon(voiceState.isRecording ? Icons.stop : Icons.mic),
+      ),
+      body: Center(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.mic),
-            SizedBox(width: 10),
-            Text('Record message'),
+            if (voiceState.filePath != null)
+              ElevatedButton(
+                onPressed: () async {
+                  if (voiceState.isPlaying) {
+                    voiceController.stopAudio();
+                  } else {
+                    await voiceController.playAudio(voiceState.filePath!);
+                  }
+                },
+                child: Text(voiceState.isPlaying ? 'Stop' : 'Play'),
+              ),
+            if (voiceState.filePath == null) const Text('No recording'),
           ],
         ),
       ),
