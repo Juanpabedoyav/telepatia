@@ -1,0 +1,59 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "telepatia-interview",
+          "appId": "1:877058521025:android:396d93e39a499e99ae6140",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "telepatia-interview",
+          "appId": "1:877058521025:ios:f71a6d496ea63a40ae6140",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "telepatia-interview",
+          "configurations": {
+            "android": "1:877058521025:android:396d93e39a499e99ae6140",
+            "ios": "1:877058521025:ios:f71a6d496ea63a40ae6140",
+            "web": "1:877058521025:web:19f0b384725fc20cae6140"
+          }
+        }
+      }
+    }
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "emulators": {
+    "functions": {
+      "port": 5001
+    },
+    "storage": {
+      "port": 9199
+    },
+    "ui": {
+      "enabled": true
+    },
+    "singleProjectMode": true
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "venv",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ]
+    }
+  ]
+}

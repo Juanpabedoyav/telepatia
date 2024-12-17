@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "877058521025",
+    "project_id": "telepatia-interview",
+    "storage_bucket": "telepatia-interview.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:877058521025:android:19e420daa99d7249ae6140",
+        "android_client_info": {
+          "package_name": "com.example.telepati"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5Xevl1b7NWLIaOCuRuXqzUaZXONjLvJg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:877058521025:android:396d93e39a499e99ae6140",
+        "android_client_info": {
+          "package_name": "com.example.telepatia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5Xevl1b7NWLIaOCuRuXqzUaZXONjLvJg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:877058521025:android:c89571c362c94322ae6140",
+        "android_client_info": {
+          "package_name": "com.example.test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5Xevl1b7NWLIaOCuRuXqzUaZXONjLvJg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
