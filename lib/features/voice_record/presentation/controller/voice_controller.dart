@@ -52,14 +52,27 @@ class VoiceController extends _$VoiceController {
   }
 
   Future<void> playAudio(String url) async {
-    state = state.copyWith(isPlaying: true);
+    if (state.currentPlayingUrl == url) {
+      stopAudio();
+      return;
+    }
+
+    stopAudio();
+
+    state = state.copyWith(currentPlayingUrl: url, isPlaying: true);
     await _audioPlayer.setUrl(url);
     await _audioPlayer.play();
+
+    _audioPlayer.playerStateStream.listen((playerState) {
+      if (playerState.processingState == ProcessingState.completed) {
+        state = state.copyWith(isPlaying: false, currentPlayingUrl: null);
+      }
+    });
   }
 
   void stopAudio() async {
     await _audioPlayer.stop();
-    state = state.copyWith(isPlaying: false);
+    state = state.copyWith(isPlaying: false, currentPlayingUrl: null);
   }
 
   Future<void> recordAudio() async {
@@ -74,11 +87,12 @@ class VoiceController extends _$VoiceController {
     state = state.copyWith(isRecording: false);
     if (state.filePath != null) {
       try {
-        String fileName = 'audio_${DateTime.now().millisecondsSinceEpoch}.mp4';
+        String fileName = 'audio_${DateTime.now()}.mp4';
 
         String downloadUrl = await uploadFile(state.filePath!, fileName);
 
         state = state.copyWith(downloadUrl: downloadUrl);
+        await getAudioFilesList();
 
         log('file uploaded: $downloadUrl');
       } catch (e) {

@@ -7,6 +7,7 @@ class VoiceState {
   final String? audioUrl;
   final String? downloadUrl;
   final List<String> audioFilesList;
+  final String? currentPlayingUrl;
 
   const VoiceState({
     required this.isRecording,
@@ -17,6 +18,7 @@ class VoiceState {
     this.audioUrl,
     this.downloadUrl,
     required this.audioFilesList,
+    this.currentPlayingUrl,
   });
 
   factory VoiceState.initial() => const VoiceState(
@@ -28,6 +30,7 @@ class VoiceState {
         audioUrl: null,
         downloadUrl: null,
         audioFilesList: [],
+        currentPlayingUrl: null,
       );
 
   VoiceState copyWith({
@@ -39,6 +42,7 @@ class VoiceState {
     String? audioUrl,
     String? downloadUrl,
     List<String>? audioFilesList,
+    String? currentPlayingUrl,
   }) {
     return VoiceState(
       isRecording: isRecording ?? this.isRecording,
@@ -49,6 +53,7 @@ class VoiceState {
       audioUrl: audioUrl ?? this.audioUrl,
       downloadUrl: downloadUrl ?? this.downloadUrl,
       audioFilesList: audioFilesList ?? this.audioFilesList,
+      currentPlayingUrl: currentPlayingUrl ?? this.currentPlayingUrl,
     );
   }
 }
