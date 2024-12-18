@@ -1,20 +1,15 @@
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:telepatia/features/voice_record/data/datasources/recording_service_datasource.dart';
 import 'package:telepatia/features/voice_record/domain/repositories/recording_repository.dart';
 
 class RecordingRepositoryImpl implements RecordingRepository {
-  @override
-  Future<Map<String, dynamic>> getRecording() {
-    return Future.value({});
-  }
+  final RecordingServiceDataSource _recordingServiceDataSource;
+
+  RecordingRepositoryImpl()
+      : _recordingServiceDataSource = RecordingServiceDataSource();
 
   @override
-  Future<Map<String, dynamic>> saveRecording(Map<String, dynamic> recording) {
-    return Future.value({});
-  }
-
-  @override
-  Future<ListResult> listAllRecording(Reference storageRef) {
-    final list = storageRef.listAll();
-    return list;
+  Future<List<String>> getAudioFilesList() {
+    final response = _recordingServiceDataSource.getAudioFilesList();
+    return response;
   }
 }

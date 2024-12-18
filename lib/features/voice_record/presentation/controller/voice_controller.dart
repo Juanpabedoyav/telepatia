@@ -5,6 +5,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:telepatia/features/voice_record/domain/usecases/recording_usecase.dart';
 import 'package:telepatia/features/voice_record/presentation/controller/voice_state.dart';
 import 'package:path/path.dart' as path;
 part 'voice_controller.g.dart';
@@ -19,6 +20,17 @@ class VoiceController extends _$VoiceController {
   final _storage = FirebaseStorage.instance;
   final _audioPlayer = AudioPlayer();
   final _audioRecorder = AudioRecorder();
+  final _recordingUseCase = RecordingUseCase();
+
+  Future<void> getAudioFilesList() async {
+    try {
+      final result = await _recordingUseCase.getAudioFilesList();
+      state = state.copyWith(audioFilesList: result);
+    } catch (e) {
+      log('Error fetching audio files: $e');
+      state = state.copyWith(audioFilesList: []);
+    }
+  }
 
   Future<String> uploadFile(String filePath, String fileName) async {
     final storageRef = _storage.ref().child('voice_notes/$fileName');

@@ -1,16 +1,12 @@
+import 'package:telepatia/features/voice_record/data/repositories_impl/recording_repository_impl.dart';
 import 'package:telepatia/features/voice_record/domain/repositories/recording_repository.dart';
 
 class RecordingUseCase {
   final RecordingRepository _recordingRepository;
 
-  RecordingUseCase(this._recordingRepository);
+  RecordingUseCase() : _recordingRepository = RecordingRepositoryImpl();
 
-  Future<Map<String, dynamic>> getRecording() async {
-    return _recordingRepository.getRecording();
-  }
-
-  Future<Map<String, dynamic>> saveRecording(
-      Map<String, dynamic> recording) async {
-    return _recordingRepository.saveRecording(recording);
+  Future<List<String>> getAudioFilesList() async {
+    return _recordingRepository.getAudioFilesList();
   }
 }

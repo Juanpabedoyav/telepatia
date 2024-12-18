@@ -1,20 +1,19 @@
 import 'package:firebase_storage/firebase_storage.dart';
 
 class RecordingServiceDataSource {
-  Stream<ListResult> listAllRecording(Reference storageRef) async* {
-    String? pageToken;
-    do {
-      final listResult = await storageRef.list(ListOptions(
-        maxResults: 100,
-        pageToken: pageToken,
-      ));
-      yield listResult;
-      pageToken = listResult.nextPageToken;
-    } while (pageToken != null);
-  }
+  final _storage = FirebaseStorage.instance;
+  Future<List<String>> getAudioFilesList() async {
+    final storageRef = _storage.ref().child('voice_notes');
+    try {
+      final result = await storageRef.listAll();
 
-  Future<Map<String, dynamic>> saveRecording(
-      Map<String, dynamic> recording) async {
-    return {};
+      final List<String> audioUrls =
+          await Future.wait(result.items.map((file) async {
+        return await file.getDownloadURL();
+      }));
+      return audioUrls;
+    } catch (e) {
+      return [];
+    }
   }
 }
